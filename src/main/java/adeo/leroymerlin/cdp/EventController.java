@@ -1,9 +1,13 @@
 package adeo.leroymerlin.cdp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/events")
@@ -31,7 +35,8 @@ public class EventController {
         eventService.delete(id);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
-    }
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public void updateEvent(@PathVariable Long id, @RequestBody Event event) {
+		eventService.updateStarsAndComment(id, event);
+	}
 }
